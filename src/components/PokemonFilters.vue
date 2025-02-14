@@ -1,14 +1,31 @@
 <!-- src/components/PokemonFilters.vue -->
 <template>
-  <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md mb-4 sm:mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
       <!-- Search Input -->
       <div class="relative">
+        <div
+          class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+        >
+          <svg
+            class="h-5 w-5 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
         <input
           v-model="searchQuery"
           type="text"
           placeholder="Search Pokémon..."
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-pokemon-cerulean focus:border-pokemon-cerulean"
+          class="w-full pl-10 pr-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pokemon-cerulean focus:border-pokemon-cerulean transition-colors"
           @input="emitFilters"
         />
       </div>
@@ -17,7 +34,7 @@
       <div class="relative">
         <select
           v-model="selectedGeneration"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-pokemon-cerulean focus:border-pokemon-cerulean"
+          class="w-full px-3 pr-8 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pokemon-cerulean focus:border-pokemon-cerulean appearance-none transition-colors"
           @change="emitFilters"
         >
           <option value="">All Generations</option>
@@ -29,13 +46,30 @@
             {{ gen.label }}
           </option>
         </select>
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 9l-7 7-7-7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
       </div>
 
       <!-- Type Filter -->
       <div class="relative">
         <select
           v-model="selectedType"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-pokemon-cerulean focus:border-pokemon-cerulean"
+          class="w-full px-3 pr-8 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pokemon-cerulean focus:border-pokemon-cerulean appearance-none transition-colors"
           @change="emitFilters"
         >
           <option value="">All Types</option>
@@ -43,6 +77,23 @@
             {{ type.charAt(0).toUpperCase() + type.slice(1) }}
           </option>
         </select>
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 9l-7 7-7-7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -57,15 +108,15 @@ const selectedGeneration = ref("");
 const selectedType = ref("");
 
 const generations = [
-  { value: "1", label: "Generation I (1-151)" },
-  { value: "2", label: "Generation II (152-251)" },
-  { value: "3", label: "Generation III (252-386)" },
-  { value: "4", label: "Generation IV (387-493)" },
-  { value: "5", label: "Generation V (494-649)" },
-  { value: "6", label: "Generation VI (650-721)" },
-  { value: "7", label: "Generation VII (722-809)" },
-  { value: "8", label: "Generation VIII (810-905)" },
-  { value: "9", label: "Generation IX (906-1010)" },
+  { value: "1", label: "Gen I (1-151)" },
+  { value: "2", label: "Gen II (152-251)" },
+  { value: "3", label: "Gen III (252-386)" },
+  { value: "4", label: "Gen IV (387-493)" },
+  { value: "5", label: "Gen V (494-649)" },
+  { value: "6", label: "Gen VI (650-721)" },
+  { value: "7", label: "Gen VII (722-809)" },
+  { value: "8", label: "Gen VIII (810-905)" },
+  { value: "9", label: "Gen IX (906-1010)" },
 ];
 
 const types = ref<string[]>([]);
@@ -98,3 +149,22 @@ const emit = defineEmits<{
   ): void;
 }>();
 </script>
+
+<style scoped>
+/* Custom select styling */
+select {
+  background-color: white;
+}
+
+/* Focus styles */
+input:focus,
+select:focus {
+  outline: none;
+}
+
+/* Transition for hover and focus states */
+input,
+select {
+  transition: all 0.2s ease-in-out;
+}
+</style>

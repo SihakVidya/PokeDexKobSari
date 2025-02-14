@@ -1,24 +1,32 @@
 <!-- src/views/PokemonView.vue -->
+<!-- src/views/PokemonView.vue -->
 <template>
-  <div class="font-space">
+  <div class="font-space max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
     <!-- Search and Filters -->
     <PokemonFilters @filter="applyFilters" />
 
     <!-- Loading State -->
-    <div v-if="loading" class="text-center py-12">
+    <div v-if="loading" class="text-center py-8 sm:py-12">
       <div
-        class="animate-spin rounded-full h-12 w-12 border-4 border-pokemon-cerulean border-t-transparent mx-auto"
+        class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-pokemon-cerulean border-t-transparent mx-auto"
       ></div>
     </div>
 
     <!-- Error State -->
-    <div v-else-if="error" class="text-center py-12 text-pokemon-red">
+    <div v-else-if="error" class="text-center py-8 sm:py-12 text-pokemon-red">
       {{ error }}
     </div>
 
     <!-- Pokemon Grid -->
     <div v-else>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Pokemon Count -->
+      <div class="text-center mb-4 text-sm sm:text-base text-gray-600">
+        Showing {{ filteredPokemon.length }} Pokémon
+      </div>
+
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+      >
         <PokemonCard
           v-for="pokemon in displayedPokemon"
           :key="pokemon.id"
@@ -27,22 +35,23 @@
       </div>
 
       <!-- Pagination -->
-      <div class="mt-8 flex justify-center gap-4">
+      <div
+        class="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4"
+      >
         <button
           @click="prevPage"
           :disabled="currentPage === 1"
-          class="px-4 py-2 bg-pokemon-cerulean text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 transition-colors"
+          class="w-full sm:w-auto px-4 py-2 bg-pokemon-cerulean text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 transition-colors text-sm sm:text-base"
         >
           Previous
         </button>
-        <span class="px-4 py-2">
-          Page {{ currentPage }} of {{ totalPages }} (Showing
-          {{ filteredPokemon.length }} Pokémon)
+        <span class="px-2 py-1 text-sm sm:text-base text-center">
+          Page {{ currentPage }} of {{ totalPages }}
         </span>
         <button
           @click="nextPage"
           :disabled="currentPage === totalPages"
-          class="px-4 py-2 bg-pokemon-cerulean text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 transition-colors"
+          class="w-full sm:w-auto px-4 py-2 bg-pokemon-cerulean text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 transition-colors text-sm sm:text-base"
         >
           Next
         </button>

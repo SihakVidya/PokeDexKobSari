@@ -2,36 +2,40 @@
   <div
     class="card-bg rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-transform duration-300 transform hover:scale-105"
   >
-    <div class="relative p-4">
+    <div class="relative p-2 sm:p-4">
       <img
         :src="pokemon.sprites.other['official-artwork'].front_default"
         :alt="pokemon.name"
-        class="pokemon-image w-full h-48 object-contain relative z-10"
+        class="pokemon-image w-full h-32 sm:h-40 md:h-48 object-contain relative z-10"
       />
-      <div class="absolute top-4 right-4 text-white font-space z-10">
+      <div
+        class="absolute top-2 sm:top-4 right-2 sm:right-4 text-white font-space z-10 text-sm sm:text-base"
+      >
         #{{ String(pokemon.id).padStart(3, "0") }}
       </div>
     </div>
 
-    <div class="p-4 bg-pokemon-cerulean text-pokemon-yellow">
-      <h2 class="text-xl font-space font-bold capitalize mb-2">
+    <div class="p-2 sm:p-4 bg-pokemon-cerulean text-pokemon-yellow">
+      <h2
+        class="text-lg sm:text-xl font-space font-bold capitalize mb-2 truncate"
+      >
         {{ pokemon.name }}
       </h2>
 
-      <div class="flex gap-2">
+      <div class="flex flex-wrap gap-1 sm:gap-2">
         <div
           v-for="type in pokemon.types"
           :key="type.type.name"
-          class="flex items-center gap-1 px-3 py-1 rounded-full"
+          class="flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full"
           :class="getTypeColor(type.type.name)"
         >
           <img
             v-if="typeSprites[type.type.name]"
             :src="typeSprites[type.type.name]"
             :alt="type.type.name"
-            class="w-5 h-5 object-contain"
+            class="w-4 h-4 sm:w-5 sm:h-5 object-contain"
           />
-          <span class="text-white text-sm font-space capitalize">
+          <span class="text-white text-xs sm:text-sm font-space capitalize">
             {{ type.type.name }}
           </span>
         </div>
@@ -93,7 +97,6 @@ const getTypeColor = (type: string): string => {
 </script>
 
 <style>
-/* src/assets/styles/pokemon-card.css */
 .card-bg {
   background-image: url(../assets/images/bg.jpg);
   position: relative;
@@ -109,16 +112,10 @@ const getTypeColor = (type: string): string => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.4
-  ); /* Adjust the last value (0.4) for darkness level */
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
-/* Ensure the content is above the overlay */
 .card-bg > * {
   position: relative;
   z-index: 2;
@@ -130,5 +127,11 @@ const getTypeColor = (type: string): string => {
 
 .pokemon-image:hover {
   transform: scale(1.1);
+}
+
+@media (max-width: 640px) {
+  .pokemon-image:hover {
+    transform: scale(1.05);
+  }
 }
 </style>
