@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mx-auto">
+  <div class="w-full mx-auto font-space">
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-8 sm:py-12">
       <div class="pokeball mx-auto"></div>
