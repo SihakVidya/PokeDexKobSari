@@ -206,7 +206,7 @@ const sortOrder = ref<"asc" | "desc">("asc");
 const currentPage = ref(1);
 const itemsPerPage = 20;
 
-const sortBy = (tab: "items" | "berries", field: string) => {
+const sortBy = (_tab: "items" | "berries", field: string) => {
   if (sortField.value === field) {
     sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
   } else {
