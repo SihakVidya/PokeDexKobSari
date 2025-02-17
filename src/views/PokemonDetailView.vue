@@ -15,7 +15,11 @@
     <div v-else-if="pokemon" class="max-w-4xl mx-auto">
       <!-- Header with Name and ID -->
       <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold capitalize">{{ pokemon.name }}</h1>
+        <h1
+          class="text-pokemon-cerulean font-pokemon text-xl sm:text-2xl md:text-3xl tracking-widest drop-shadow-lg flex items-center gap-2 capitalize"
+        >
+          {{ pokemon.name }}
+        </h1>
         <span class="text-xl text-gray-600">
           #{{ String(pokemon.id).padStart(3, "0") }}
         </span>
@@ -56,7 +60,9 @@
 
           <!-- Description -->
           <div class="bg-white rounded-lg p-6 shadow-lg">
-            <h2 class="text-xl font-semibold mb-4">Description</h2>
+            <h2 class="text-xl font-semibold mb-4 text-pokemon-bu-red">
+              Description
+            </h2>
             <p class="text-gray-700">{{ description }}</p>
           </div>
         </div>
@@ -64,17 +70,20 @@
         <!-- Right Column: Info and Stats -->
         <div class="space-y-6">
           <!-- Pokemon Info -->
+          <!-- Inside the Info section of your template -->
           <div class="bg-white rounded-lg p-6 shadow-lg">
-            <h2 class="text-xl font-semibold mb-4">Info</h2>
-            <table class="w-full">
-              <tbody>
-                <tr
-                  v-for="info in pokemonInfo"
-                  :key="info.label"
-                  class="border-b"
-                >
-                  <td class="py-2 font-medium">{{ info.label }}</td>
-                  <td class="py-2">
+            <h2 class="text-xl font-semibold mb-4 text-pokemon-bu-red">Info</h2>
+            <div class="space-y-4">
+              <div
+                v-for="info in pokemonInfo"
+                :key="info.label"
+                class="pb-4 border-b"
+              >
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">{{
+                    info.label
+                  }}</span>
+                  <span class="text-right">
                     <!-- Special handling for abilities -->
                     <template v-if="info.label === 'Abilities'">
                       <span class="space-x-2">
@@ -94,15 +103,17 @@
                     <template v-else>
                       {{ info.value }}
                     </template>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Base Stats -->
           <div class="bg-white rounded-lg p-6 shadow-lg">
-            <h2 class="text-xl font-semibold mb-4">Base Stats</h2>
+            <h2 class="text-xl font-semibold mb-4 text-pokemon-bu-red">
+              Base Stats
+            </h2>
             <PokemonStats :stats="pokemon.stats" />
 
             <!-- Total Stats -->
@@ -118,7 +129,9 @@
 
       <!-- Evolution Chain -->
       <div class="mt-8 bg-white rounded-lg p-6 shadow-lg">
-        <h2 class="text-xl font-semibold mb-6">Evolution Chain</h2>
+        <h2 class="text-xl font-semibold mb-6 text-pokemon-bu-red">
+          Evolution Chain
+        </h2>
         <div class="flex items-center justify-center gap-4 flex-wrap">
           <template
             v-for="(evolution, index) in evolutionChain"
@@ -343,3 +356,10 @@ onMounted(() => {
   loadPokemonData(id);
 });
 </script>
+
+<style scoped>
+/* Add any additional styles you need */
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+</style>
