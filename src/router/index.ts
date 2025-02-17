@@ -5,6 +5,8 @@ import PokemonDetailView from "../views/PokemonDetailView.vue";
 import MovesView from "../views/MovesView.vue";
 import AbilitiesView from "../views/AbilitiesView.vue";
 import AbilityDetailView from "../views/AbilityDetailView.vue";
+import TypesView from "../views/TypesView.vue";
+import TypeDetailView from "../views/TypeDetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +39,16 @@ const router = createRouter({
       path: "/abilities/:name",
       name: "ability-detail",
       component: AbilityDetailView,
+    },
+    {
+      path: "/types",
+      name: "types",
+      component: TypesView,
+    },
+    {
+      path: "/types/:name",
+      name: "type-detail",
+      component: TypeDetailView,
     },
   ],
 });
