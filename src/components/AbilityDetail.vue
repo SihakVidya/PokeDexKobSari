@@ -35,7 +35,7 @@
         <h2 class="text-xl font-semibold mb-4">
           Pokémon with {{ ability?.name }}
         </h2>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div
             v-for="pokemon in ability?.pokemon"
             :key="pokemon.pokemon.name"
@@ -114,3 +114,23 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style>
+.pokeball {
+  width: 40px;
+  height: 40px;
+  background-image: url("../assets/images/pokeball.png");
+  background-size: cover;
+  animation: jump 1s infinite;
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+</style>

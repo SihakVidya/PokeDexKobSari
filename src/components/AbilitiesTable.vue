@@ -1,4 +1,3 @@
-<!-- src/components/AbilitiesTable.vue -->
 <template>
   <div class="w-full mx-auto font-space">
     <!-- Loading State -->
@@ -69,7 +68,14 @@
     <div class="mt-4 flex justify-center">
       <nav class="flex space-x-2">
         <button
-          v-for="pageNum in totalPages"
+          @click="changePage(currentPage - 1)"
+          :disabled="currentPage === 1"
+          class="px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Previous
+        </button>
+        <button
+          v-for="pageNum in visiblePages"
           :key="pageNum"
           @click="changePage(pageNum)"
           :class="[
@@ -80,6 +86,13 @@
           ]"
         >
           {{ pageNum }}
+        </button>
+        <button
+          @click="changePage(currentPage + 1)"
+          :disabled="currentPage === totalPages"
+          class="px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Next
         </button>
       </nav>
     </div>
@@ -133,8 +146,24 @@ const handleSearch = async () => {
 };
 
 const changePage = (page: number) => {
-  currentPage.value = page;
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+  }
 };
+
+// Compute visible pages for pagination
+const visiblePages = computed(() => {
+  const maxVisiblePages = window.innerWidth < 640 ? 5 : 10;
+  const half = Math.floor(maxVisiblePages / 2);
+  let start = Math.max(currentPage.value - half, 1);
+  let end = Math.min(start + maxVisiblePages - 1, totalPages.value);
+
+  if (end - start < maxVisiblePages - 1) {
+    start = Math.max(end - maxVisiblePages + 1, 1);
+  }
+
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+});
 
 const loadAllAbilities = async () => {
   loading.value = true;
@@ -157,3 +186,40 @@ const navigateToDetail = (abilityName: string) => {
 
 onMounted(loadAllAbilities);
 </script>
+
+<style>
+.pokeball {
+  width: 40px;
+  height: 40px;
+  background-image: url("../assets/images/pokeball.png");
+  background-size: cover;
+  animation: jump 1s infinite;
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th:first-child,
+td:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+th:last-child,
+td:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+</style>
