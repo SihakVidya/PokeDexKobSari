@@ -145,14 +145,13 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { TypeService } from "../services/TypeService";
 import { MovesService } from "../services/MovesService";
 import type { Type } from "../types/types";
 import type { Move } from "../types/moves";
 
 const route = useRoute();
-const router = useRouter();
 const type = ref<Type | null>(null);
 const moves = ref<Move[]>([]);
 const loading = ref(true);

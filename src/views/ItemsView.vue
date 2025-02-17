@@ -69,7 +69,7 @@
               <th class="px-4 py-2 text-left">Sprite</th>
               <th
                 class="px-4 py-2 text-left cursor-pointer hover:text-pokemon-cerulean"
-                @click="sortBy('items', 'name')"
+                @click="sortBy('items')"
               >
                 Name
                 <span v-if="sortField === 'name'" class="ml-1">
@@ -78,7 +78,7 @@
               </th>
               <th
                 class="px-4 py-2 text-left cursor-pointer hover:text-pokemon-cerulean"
-                @click="sortBy('items', 'category')"
+                @click="sortBy('items')"
               >
                 Category
                 <span v-if="sortField === 'category'" class="ml-1">
@@ -112,7 +112,7 @@
             <tr>
               <th
                 class="px-4 py-2 text-left cursor-pointer hover:text-pokemon-cerulean"
-                @click="sortBy('berries', 'name')"
+                @click="sortBy('berries')"
               >
                 Name
                 <span v-if="sortField === 'name'" class="ml-1">
@@ -121,7 +121,7 @@
               </th>
               <th
                 class="px-4 py-2 text-left cursor-pointer hover:text-pokemon-cerulean"
-                @click="sortBy('berries', 'firmness')"
+                @click="sortBy('berries')"
               >
                 Firmness
                 <span v-if="sortField === 'firmness'" class="ml-1">
@@ -206,7 +206,7 @@ const sortOrder = ref<"asc" | "desc">("asc");
 const currentPage = ref(1);
 const itemsPerPage = 20;
 
-const sortBy = (_tab: "items" | "berries", field: string) => {
+const sortBy = (field: string) => {
   if (sortField.value === field) {
     sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
   } else {
