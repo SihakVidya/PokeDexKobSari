@@ -3,9 +3,7 @@
   <div class="font-space max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-8 sm:py-12">
-      <div
-        class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-pokemon-cerulean border-t-transparent mx-auto"
-      ></div>
+      <div class="pokeball"></div>
     </div>
 
     <!-- Error State -->

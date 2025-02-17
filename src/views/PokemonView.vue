@@ -7,9 +7,7 @@
 
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-8 sm:py-12">
-      <div
-        class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-pokemon-cerulean border-t-transparent mx-auto"
-      ></div>
+      <div class="pokeball"></div>
     </div>
 
     <!-- Error State -->
