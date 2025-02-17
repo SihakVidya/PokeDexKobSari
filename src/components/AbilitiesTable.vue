@@ -94,7 +94,6 @@ import type { Ability } from "../types/abilities";
 import { debounce } from "lodash";
 
 const router = useRouter();
-const abilities = ref<Ability[]>([]);
 const allAbilities = ref<Ability[]>([]); // Store all abilities
 const loading = ref(true);
 const searchQuery = ref("");
