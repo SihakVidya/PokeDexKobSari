@@ -1,4 +1,4 @@
-// src/views/PokemonDetailView.vue
+<!-- src/views/PokemonDetailView.vue -->
 <template>
   <div class="font-space max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
     <!-- Loading State -->
@@ -40,9 +40,10 @@
 
           <!-- Types -->
           <div class="flex gap-2">
-            <div
+            <router-link
               v-for="type in pokemon.types"
               :key="type.type.name"
+              :to="`/types/${type.type.name}`"
               class="flex items-center gap-1 px-3 py-1 rounded-full"
               :class="getTypeColor(type.type.name)"
             >
@@ -55,7 +56,7 @@
               <span class="text-white font-space capitalize">
                 {{ type.type.name }}
               </span>
-            </div>
+            </router-link>
           </div>
 
           <!-- Description -->

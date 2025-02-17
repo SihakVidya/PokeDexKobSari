@@ -7,6 +7,7 @@ import AbilitiesView from "../views/AbilitiesView.vue";
 import AbilityDetailView from "../views/AbilityDetailView.vue";
 import TypesView from "../views/TypesView.vue";
 import TypeDetailView from "../views/TypeDetailView.vue";
+import ItemsView from "../views/ItemsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,11 @@ const router = createRouter({
       path: "/types/:name",
       name: "type-detail",
       component: TypeDetailView,
+    },
+    {
+      path: "/items",
+      name: "items",
+      component: ItemsView,
     },
   ],
 });

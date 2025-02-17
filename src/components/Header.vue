@@ -100,7 +100,6 @@ const routes = [
   { path: "/abilities", name: "Abilities" },
   { path: "/types", name: "Types" },
   { path: "/items", name: "Items" },
-  { path: "/machines", name: "Machines" },
   { path: "/locations", name: "Locations" },
 ];
 
