@@ -74,7 +74,27 @@
                   class="border-b"
                 >
                   <td class="py-2 font-medium">{{ info.label }}</td>
-                  <td class="py-2">{{ info.value }}</td>
+                  <td class="py-2">
+                    <!-- Special handling for abilities -->
+                    <template v-if="info.label === 'Abilities'">
+                      <span class="space-x-2">
+                        <router-link
+                          v-for="ability in pokemon.abilities"
+                          :key="ability.ability.name"
+                          :to="`/abilities/${formatAbilityUrl(
+                            ability.ability.name
+                          )}`"
+                          class="text-pokemon-cerulean hover:underline cursor-pointer"
+                        >
+                          {{ formatAbilityName(ability.ability.name) }}
+                          <span v-if="ability.is_hidden">(Hidden)</span>
+                        </router-link>
+                      </span>
+                    </template>
+                    <template v-else>
+                      {{ info.value }}
+                    </template>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -175,6 +195,17 @@ const totalStats = computed(() => {
   return pokemon.value.stats.reduce((total, stat) => total + stat.base_stat, 0);
 });
 
+const formatAbilityUrl = (name: string): string => {
+  return name.toLowerCase().replace(/\s+/g, "-");
+};
+
+const formatAbilityName = (name: string): string => {
+  return name
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
 const getTypeColor = (type: string): string => {
   const colors: Record<string, string> = {
     normal: "bg-gray-400",
@@ -271,10 +302,7 @@ const loadPokemonData = async (id: number) => {
       },
       { label: "Height", value: `${pokemonData.height / 10} m` },
       { label: "Weight", value: `${pokemonData.weight / 10} kg` },
-      {
-        label: "Abilities",
-        value: pokemonData.abilities.map((a) => a.ability.name).join(", "),
-      },
+      { label: "Abilities", value: "" }, // Empty value since we handle it in template
       { label: "Shape", value: speciesData.shape?.name || "Unknown" },
       { label: "Color", value: speciesData.color?.name || "Unknown" },
     ];
