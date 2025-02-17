@@ -49,4 +49,27 @@ export class PokemonService {
     this.pokemonCache.set(cacheKey, data);
     return data;
   }
+
+  static async getPokemonSpecies(id: number): Promise<any> {
+    try {
+      const response = await fetch(`${this.BASE_URL}/pokemon-species/${id}`);
+      if (!response.ok)
+        throw new Error(`Failed to fetch Pokemon species for ${id}`);
+      return response.json();
+    } catch (error) {
+      console.error("Failed to fetch Pokemon species:", error);
+      throw error;
+    }
+  }
+
+  static async getEvolutionChain(url: string): Promise<any> {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Failed to fetch evolution chain");
+      return response.json();
+    } catch (error) {
+      console.error("Failed to fetch evolution chain:", error);
+      throw error;
+    }
+  }
 }

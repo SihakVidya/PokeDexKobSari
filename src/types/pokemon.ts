@@ -8,25 +8,7 @@ export interface PokemonListResponse {
     url: string;
   }[];
 }
-
-export interface PokemonDetail {
-  id: number;
-  name: string;
-  sprites: {
-    other: {
-      "official-artwork": {
-        front_default: string;
-      };
-    };
-  };
-  types: {
-    slot: number;
-    type: {
-      name: string;
-      url: string;
-    };
-  }[];
-}
+// Removed duplicate PokemonDetail interface
 
 export interface PokemonType {
   id: number;
@@ -64,5 +46,89 @@ export interface TypesResponse {
   results: {
     name: string;
     url: string;
+  }[];
+}
+
+export interface PokemonSpecies {
+  flavor_text_entries: FlavorTextEntry[];
+  evolution_chain: {
+    url: string;
+  };
+  shape: {
+    name: string;
+    url: string;
+  };
+  color: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface FlavorTextEntry {
+  flavor_text: string;
+  language: {
+    name: string;
+    url: string;
+  };
+  version: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface EvolutionChain {
+  chain: ChainLink;
+}
+
+export interface ChainLink {
+  species: {
+    name: string;
+    url: string;
+  };
+  evolves_to: ChainLink[];
+}
+
+// Helper interface for the evolution display
+export interface ProcessedEvolution {
+  id: number;
+  name: string;
+  sprite: string;
+}
+
+// Update PokemonDetail interface to include stats
+export interface PokemonDetail {
+  height: number;
+  weight: number;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }[];
+  id: number;
+  name: string;
+  sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
+  };
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
   }[];
 }

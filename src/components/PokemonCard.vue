@@ -1,6 +1,7 @@
 <template>
   <div
-    class="card-bg rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-transform duration-300 transform hover:scale-105"
+    @click="navigateToPokemon"
+    class="card-bg rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
   >
     <div class="relative p-2 sm:p-4">
       <img
@@ -48,6 +49,8 @@
 import { ref, onMounted } from "vue";
 import type { PokemonDetail } from "../types/pokemon";
 import { PokemonTypeService } from "../services/PokemonTypeService";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const props = defineProps<{
   pokemon: PokemonDetail;
@@ -93,6 +96,10 @@ const getTypeColor = (type: string): string => {
   };
 
   return colors[type] || "bg-gray-400";
+};
+
+const navigateToPokemon = () => {
+  router.push(`/pokemon/${props.pokemon.id}`);
 };
 </script>
 
